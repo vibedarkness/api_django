@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api_vibe',
     'rest_framework',
+    'product',
+    # 'django_faker',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +60,8 @@ MIDDLEWARE = [
 #         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
 #     ]
 # }
+# FAKER_LOCALE = None     # settings.LANGUAGE_CODE is loaded
+# FAKER_PROVIDERS = None  # faker.DEFAULT_PROVIDERS is loaded (all)
 
 ROOT_URLCONF = 'api_django.urls'
 
@@ -85,8 +89,12 @@ WSGI_APPLICATION = 'api_django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'api',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
