@@ -6,7 +6,11 @@ from django.http import JsonResponse
 
 from django.forms.models import model_to_dict
 
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
+
+@api_view(['GET'])
 def api_views_vibe(request):
     dark= Product.objects.all().order_by('?').first()
     data = {}
@@ -17,4 +21,4 @@ def api_views_vibe(request):
         # data['content']=dark.content
         # data['price']=dark.price
 
-    return JsonResponse(data)
+    return Response(data)
