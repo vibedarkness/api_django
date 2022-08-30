@@ -11,4 +11,6 @@ class Product(models.Model):
 
         return "%.2f"%(float(self.price) * 0.5)
 
+    def __str__(self):
+        return self.name
 

@@ -43,7 +43,11 @@ class ProductMixinsViews(generics.GenericAPIView, mixins.CreateModelMixin,mixins
     lookup_field='pk'
     authentication_classes=[authentication.SessionAuthentication]
 
-    permission_classes=[permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes=[permissions.IsAuthenticatedOrReadOnly]
+
+    permission_classes=[permissions.DjangoModelPermissions]
+
+    
 
     def get(self, request, *args, **kwargs):
         pk=kwargs.get('pk')
