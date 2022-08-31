@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api_vibe',
     'rest_framework',
+    'rest_framework.authtoken',
     'product',
+
     # 'django_faker',
 ]
 

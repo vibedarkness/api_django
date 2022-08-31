@@ -1,13 +1,14 @@
 
 
+from .permissions import IstaffPermissions
 from product.models import Product
 
 from django.http import JsonResponse
 
-from django.forms.models import model_to_dict
+# from django.forms.models import model_to_dict
 
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+# from rest_framework.decorators import api_view
 
 from .serializer import ProductSerializer
 
@@ -41,11 +42,11 @@ class ProductMixinsViews(generics.GenericAPIView, mixins.CreateModelMixin,mixins
     serializer_class=ProductSerializer  
 
     lookup_field='pk'
-    authentication_classes=[authentication.SessionAuthentication]
+    authentication_classes=[authentication.SessionAuthentication, authentication.TokenAuthentication]
 
     # permission_classes=[permissions.IsAuthenticatedOrReadOnly]
 
-    permission_classes=[permissions.DjangoModelPermissions]
+    permission_classes=[IstaffPermissions]
 
     
 
