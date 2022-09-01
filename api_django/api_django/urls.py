@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('api_vibe.urls')),
     path('product/',include('product.urls')),
+    path('product/v2',include('api_django.routers')),
 
 ]
 

@@ -1,6 +1,6 @@
 
 
-from .permissions import IstaffPermissions
+# from ..api_vibe.permissions import IstaffPermissions
 from product.models import Product
 
 from django.http import JsonResponse
@@ -11,47 +11,51 @@ from rest_framework.response import Response
 # from rest_framework.decorators import api_view
 
 from .serializer import ProductSerializer
+from api_vibe.mixins import StaffEditorPermissionMixin
 
-from rest_framework import generics,mixins,permissions,authentication
+from rest_framework import generics, mixins
+# , permissions, authentication
+
 
 class DetailsApiViews(generics.RetrieveAPIView):
-    queryset=Product.objects.all()
-    serializer_class=ProductSerializer
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
 
 class CreateApiViews(generics.CreateAPIView):
-    queryset=Product.objects.all()
-    serializer_class=ProductSerializer
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
 
 class UpdateProductViews(generics.UpdateAPIView):
-    queryset=Product.objects.all()
-    serializer_class=ProductSerializer
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
 
 class DeleteProductViews(generics.DestroyAPIView):
-    queryset=Product.objects.all()
-    serializer_class=ProductSerializer
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
-    
+
 class ListeApiViews(generics.ListCreateAPIView):
-    queryset=Product.objects.all()
-    serializer_class=ProductSerializer
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
-class ProductMixinsViews(generics.GenericAPIView, mixins.CreateModelMixin,mixins.ListModelMixin,mixins.DestroyModelMixin, mixins.UpdateModelMixin,mixins.RetrieveModelMixin):
+class ProductMixinsViews(StaffEditorPermissionMixin,generics.GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin):
 
-    queryset=Product.objects.all()
-    serializer_class=ProductSerializer  
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
-    lookup_field='pk'
-    authentication_classes=[authentication.SessionAuthentication, authentication.TokenAuthentication]
+    lookup_field = 'pk'
+    # authentication_classes=[authentication.SessionAuthentication, authentication.TokenAuthentication]
 
     # permission_classes=[permissions.IsAuthenticatedOrReadOnly]
 
-    permission_classes=[IstaffPermissions]
-
-    
+    # permission_classes = [permissions.IsAdminUser, IstaffPermissions]
 
     def get(self, request, *args, **kwargs):
-        pk=kwargs.get('pk')
+        pk = kwargs.get('pk')
         if pk is not None:
             return self.retrieve(request, *args, **kwargs)
         return self.list(request, *args, **kwargs)
@@ -61,96 +65,12 @@ class ProductMixinsViews(generics.GenericAPIView, mixins.CreateModelMixin,mixins
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
-    
+
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
-    
+
     def patch(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # @api_view(['POST'])
@@ -169,11 +89,9 @@ class ProductMixinsViews(generics.GenericAPIView, mixins.CreateModelMixin,mixins
 #         return Response({'details': 'données invalid'})
 
 
-
 #     # if dark:
 #     #     # data= model_to_dict(dark)
 #     #     # data['name']=dark.name
 #     #     # data['content']=dark.content
 #     #     # data['price']=dark.price
 #     #     data= ProductSerializer(dark).data
-

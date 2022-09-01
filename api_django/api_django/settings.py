@@ -65,6 +65,17 @@ MIDDLEWARE = [
 # FAKER_LOCALE = None     # settings.LANGUAGE_CODE is loaded
 # FAKER_PROVIDERS = None  # faker.DEFAULT_PROVIDERS is loaded (all)
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        'rest_framework.authentication.SessionAuthentication',
+        'product.authentication.TokenAuthentication',
+    ],
+
+    "DEFAULT_PERMISSION_CLASSES":[
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
+}
+
 ROOT_URLCONF = 'api_django.urls'
 
 TEMPLATES = [
