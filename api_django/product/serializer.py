@@ -4,6 +4,8 @@ from rest_framework import serializers
 
 from rest_framework.reverse import reverse
 
+# from api_vibe.serializeruser import UserPublicSerializer
+
 from .models import Product
 
 from .validators import validate_name
@@ -15,10 +17,12 @@ class ProductSerializer(serializers.ModelSerializer):
     email=serializers.EmailField(write_only=True)
     name=serializers.CharField(validators=[validate_name])
     username=serializers.CharField(source="user",read_only=True)
+    # owner=serializers.SerializerMethodField(read_only=True)
+    # owner=UserPublicSerializer(source="user",read_only=True)
     class Meta:
 
         model = Product
-        fields=('username','email','url','pk','name','content','price','get_discount')
+        fields=('username','email','url','pk','name','content','price','get_discount','public')
 
     def create(self,validated_data):
         email=validated_data.pop('email')
@@ -30,6 +34,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
         instance.name=validated_data.get('name')
         return super().update(instance, validated_data)
+
+    # def get_owner(self,obj):
+    #     return {'id':obj.user.pk, 'username':obj.user.username, 'password':obj.user.password}
 
     # def validate_name(self,value):
     #     qs=Product.objects.filter(name__iexact=value)

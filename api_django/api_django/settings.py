@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'product',
+    'search'
 
     # 'django_faker',
 ]
@@ -73,7 +74,11 @@ REST_FRAMEWORK = {
 
     "DEFAULT_PERMISSION_CLASSES":[
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ]
+    ],
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 5
+
 }
 
 ROOT_URLCONF = 'api_django.urls'
