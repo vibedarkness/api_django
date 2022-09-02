@@ -14,10 +14,11 @@ class ProductSerializer(serializers.ModelSerializer):
     url=serializers.HyperlinkedIdentityField(view_name="product_detail",lookup_field="pk")
     email=serializers.EmailField(write_only=True)
     name=serializers.CharField(validators=[validate_name])
+    username=serializers.CharField(source="user",read_only=True)
     class Meta:
 
         model = Product
-        fields=('email','url','pk','name','content','price','get_discount')
+        fields=('username','email','url','pk','name','content','price','get_discount')
 
     def create(self,validated_data):
         email=validated_data.pop('email')
