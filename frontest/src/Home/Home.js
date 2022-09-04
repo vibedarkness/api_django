@@ -1,42 +1,39 @@
 import "./Home.css";
 
+import { useState } from "react";
+
 const Home = () => {
+  const [div, setDiv] = useState([
+    {
+      id: 1,
+      nom: "Thiombane",
+      prenom: "oumar",
+      age: 24,
+      sexe: "masculin",
+      date_de_naissance: "25/12/1997",
+    },
+    {
+      id: 2,
+      nom: "Ndiaye",
+      prenom: "Coumba",
+      age: 23,
+      sexe: "Feminin",
+      date_de_naissance: "02/05/1999",
+    },
+    
+  ]);
+
+  const omzostate = () => {};
   return (
     <div className="Home">
       <div className="contenu">
-        {/* <div class="product-card">
-          <h1>Best Shoes</h1>
-          <p>Lorem ipsum, or lipsum as it is sometimes known</p>
-          <div class="product-pic"></div>
-          <div class="product-colors">
-            <span
-              class="blue active"
-              data-color="#7ed6df"
-              data-pic="url(1.png)"
-            ></span>
-            <span
-              class="green"
-              data-color="#badc58"
-              data-pic="url(2.png)"
-            ></span>
-            <span
-              class="yellow"
-              data-color="#f9ca24"
-              data-pic="url(3.png)"
-            ></span>
-            <span
-              class="rose"
-              data-color="#ff7979"
-              data-pic="url(4.png)"
-            ></span>
+        {div.map((div) => (
+          <div className="blog" key={div.id}>
+            <a href="" className="blog-title">Prenom: {div.prenom}</a><br/>
+            <a href="" className="blog-title">Nom: {div.nom}</a><br/>
+            <a href="" className="blog-title">Age: {div.age}</a>
           </div>
-          <div class="product-info">
-            <div class="product-price">$90</div>
-            <a href="#" class="product-button">
-              Add to Cart
-            </a>
-          </div>
-        </div> */}
+        ))}
       </div>
     </div>
   );
