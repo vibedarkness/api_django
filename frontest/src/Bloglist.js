@@ -1,5 +1,5 @@
 
-const Bloglist = ({div,titre,supprimer}) => {
+const Bloglist = ({div,titre}) => {
 
   return (
     <div className="bloglist">
@@ -16,7 +16,7 @@ const Bloglist = ({div,titre,supprimer}) => {
               Date de naissance: {div.date_de_naissance}
             </small>
             <p className="blog-author">Age: {div.age}</p>
-            <button onClick={()=>supprimer(div.id)}>Supprimer Article</button>
+            {/* <button onClick={()=>supprimer(div.id)}>Supprimer Article</button> */}
           </div>
         ))}
       </div>
